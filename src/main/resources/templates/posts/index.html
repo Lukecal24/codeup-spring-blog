@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>All Posts</title>
+</head>
+<body>
+<h1>All Posts</h1>
+<div th:each ="post:${posts}">
+  <h1><span th:text="${post.title}"></span></h1>
+  <p><span th:text="${post.body}"></span></p>
+
+</div>
+</body>
+</html>
