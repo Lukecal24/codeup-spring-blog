@@ -4,7 +4,9 @@ public class Post {
     private String title;
     private String body;
 
-    public Post() {}
+    public Post() {
+
+    }
 
     public Post(String title, String body) {
         this.title = title;
