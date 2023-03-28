@@ -1,9 +1,20 @@
 package com.codeup.codeupspringblog.models;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "int(11) UNSIGNED", nullable = true, unique = true)
+    private Long id;
+    @Column(length = 200, nullable = false)
     private String title;
+    @Column(nullable = false)
     private String body;
 
+
+    //Constructors
     public Post() {
 
     }
@@ -13,6 +24,7 @@ public class Post {
         this.body = body;
     }
 
+    //Getters and Setters
     public String getTitle() {
         return title;
     }
