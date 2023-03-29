@@ -10,7 +10,7 @@ public class Post {
     private Long id;
     @Column(length = 200, nullable = false)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "text")
     private String body;
 
 
