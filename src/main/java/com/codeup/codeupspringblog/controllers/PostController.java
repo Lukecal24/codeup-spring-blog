@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
 
 
 @Controller
@@ -27,9 +28,13 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String postId(@PathVariable long id, Model model) {
-        Post post = postDao.findById(id).get();
-        model.addAttribute("post", post);
-        return "posts/show";
+        Optional<Post> optionalPost = postDao.findById(id);
+        if(optionalPost.isPresent()){
+            Post post = postDao.findById(id).get();
+            model.addAttribute("post", post);
+            return "posts/show";
+        } else
+            return "redirect:/posts";
     }
 
     @GetMapping("/posts/create")
