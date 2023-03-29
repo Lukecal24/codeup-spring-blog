@@ -9,7 +9,7 @@ public class Post {
     @Column(columnDefinition = "int(11) UNSIGNED", nullable = true, unique = true)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
     @Column(length = 200, nullable = false)
@@ -17,6 +17,13 @@ public class Post {
     @Column(nullable = false, columnDefinition = "text")
     private String body;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     //Constructors
     public Post() {
@@ -26,6 +33,26 @@ public class Post {
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
+    }
+
+    public Post(Long id, String title, String body) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+
+    public Post(User user, String title, String body) {
+        this.user = user;
+        this.title = title;
+        this.body = body;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     //Getters and Setters
@@ -44,5 +71,4 @@ public class Post {
     public void setBody(String body) {
         this.body = body;
     }
-
 }
