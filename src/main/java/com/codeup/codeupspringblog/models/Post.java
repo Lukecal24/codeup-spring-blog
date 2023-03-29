@@ -8,6 +8,10 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int(11) UNSIGNED", nullable = true, unique = true)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @Column(length = 200, nullable = false)
     private String title;
     @Column(nullable = false, columnDefinition = "text")
