@@ -17,6 +17,7 @@ public class Post {
     @Column(nullable = false, columnDefinition = "text")
     private String body;
 
+
     public User getUser() {
         return user;
     }
