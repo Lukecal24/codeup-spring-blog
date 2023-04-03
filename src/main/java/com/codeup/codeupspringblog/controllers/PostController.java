@@ -1,5 +1,6 @@
 package com.codeup.codeupspringblog.controllers;
 
+import com.codeup.codeupspringblog.Services.EmailService;
 import com.codeup.codeupspringblog.models.Post;
 import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
@@ -17,9 +18,12 @@ public class PostController {
     private final PostRepository postDao;
     private final UserRepository usersDao;
 
-    public PostController(PostRepository postDao, UserRepository usersDao) {
+    private final EmailService emailService;
+
+    public PostController(PostRepository postDao, UserRepository usersDao, EmailService emailService) {
         this.postDao = postDao;
         this.usersDao = usersDao;
+        this.emailService = emailService;
     }
 
     @GetMapping("/posts")
@@ -41,21 +45,20 @@ public class PostController {
         model.addAttribute("post", new Post());
         return "posts/create";
     }
-
-//    @PostMapping("/posts/create")
-//    public String postCreatePost(@RequestParam (name="title")String title, @RequestParam(name="body")String body) {
-//        User user = usersDao.findById(1);
-//        Post newPost = new Post(title, body);
-//        postDao.save(newPost);
-//        return "redirect:/posts";
-//    }
     @PostMapping("/posts/create")
     public String postCreatePost(@ModelAttribute Post post) {
-        User user = usersDao.findById(1);
+        User user = usersDao.findById(1); // Change this to get the current user
         post.setUser(user);
         postDao.save(post);
+
+        // Prepare and send email to the post's user
+        String subject = "New post created";
+        String body = "Your post has been created with title: " + post.getTitle();
+        emailService.prepareAndSend(post, subject, body);
+
         return "redirect:/posts";
     }
+
 
     //edit
     @GetMapping("/posts/{id}/edit")
