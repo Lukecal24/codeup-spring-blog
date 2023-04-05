@@ -52,7 +52,7 @@ public class PostController {
         postDao.save(post);
 
         // Prepare and send email to the post's user
-        String subject = "New post created";
+        String subject = "New post created - " + post.getTitle();
         String body = "Your post has been created with title: " + post.getTitle();
         emailService.prepareAndSend(post, subject, body);
 
