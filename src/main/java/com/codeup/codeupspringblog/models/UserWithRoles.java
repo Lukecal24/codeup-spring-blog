@@ -9,6 +9,7 @@ import java.util.Collection;
 public class UserWithRoles extends User implements UserDetails {
 
     public UserWithRoles(User user) {
+
         super(user);  // Call the copy constructor defined in User
     }
 
@@ -20,6 +21,7 @@ public class UserWithRoles extends User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
+
         return true;
     }
 
@@ -30,11 +32,13 @@ public class UserWithRoles extends User implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
+
         return true;
     }
 
     @Override
     public boolean isEnabled() {
+
         return true;
     }
 }
