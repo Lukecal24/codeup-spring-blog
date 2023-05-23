@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>All Posts</title>
-</head>
+<head th:replace="partials/partials.html :: head('All Posts')"></head>
 <body>
-  <nav th:replace="partials/navbar :: navbar">
-    This div will be *replaced* by the fragment
-  </nav>
-      <h1>All Posts</h1>
-        <div th:each ="post:${posts}">
-          <h1><span th:text="${post.title}"></span></h1>
-          <p><span th:text="${post.body}"></span></p>
-        </div>
-  <nav th:replace="partials/navbar :: footer">
+<nav th:replace="partials/partials.html :: nav"></nav>
+<header th:replace="partials/partials.html :: header('Posts')"></header>
+  <main class="container">
+        <h1>All Posts</h1>
+          <div th:each ="post:${posts}">
+            <h1><span th:text="${post.title}"></span></h1>
+            <p><span th:text="${post.body}"></span></p>
+          </div>
+    <nav th:replace="partials/navbar :: footer">
+  </main>
 </body>
 </html>
